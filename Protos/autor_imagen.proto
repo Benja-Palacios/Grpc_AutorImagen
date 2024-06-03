@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "Grpc_AutorImagen";
+
+package autor_imagen.proto;
+
+service AutorImagenService {
+  // Guarda una imagen en la base de datos
+  rpc GuardarImagen (ImagenRequest) returns (Respuesta);
+}
+
+message ImagenRequest {
+  // Contenido de la imagen (por ejemplo, bytes codificados)
+  bytes contenido = 1;
+}
+
+message Respuesta {
+  // Mensaje de respuesta
+  string mensaje = 1;
+}
