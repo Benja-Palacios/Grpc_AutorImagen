@@ -18,4 +18,15 @@ Para probar el servicio, se recomienda utilizar BloomRPC, una herramienta que fa
 
 ![image](https://github.com/Benja-Palacios/Grpc_AutorImagen/assets/123142076/ad6f0050-fda0-4994-ad12-8c6e58bde644)
 
+## Base de Datos SQL SERVER 
+CREATE DATABASE AutorImagen;
+
+USE AutorImagen;
+
+CREATE TABLE Imagen (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Contenido VARBINARY(MAX) NOT NULL,
+);
+
+
 
