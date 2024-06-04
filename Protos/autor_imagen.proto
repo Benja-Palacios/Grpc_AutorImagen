@@ -10,11 +10,10 @@ service AutorImagenService {
 }
 
 message ImagenRequest {
-  // Contenido de la imagen (por ejemplo, bytes codificados)
-  bytes contenido = 1;
+	bytes contenido = 1;
+	int64 idAutorLibro = 2;
 }
 
 message Respuesta {
-  // Mensaje de respuesta
-  string mensaje = 1;
+    string mensaje = 1;
 }

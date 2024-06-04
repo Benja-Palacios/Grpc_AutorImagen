@@ -20,7 +20,8 @@ namespace Grpc_AutorImagen.Services
                 // Guardar la imagen en la base de datos
                 var imagen = new AutorImagen
                 {
-                    Contenido = request.Contenido.ToByteArray()
+                    Contenido = request.Contenido.ToByteArray(),
+                    IdAutorLibro = (int)request.IdAutorLibro
                 };
 
                 _contexto.AutoresImagenes.Add(imagen);
