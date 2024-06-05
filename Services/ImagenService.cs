@@ -2,6 +2,7 @@ using Grpc.Core;
 using Grpc_AutorImagen;
 using Grpc_AutorImagen.Model;
 using Grpc_AutorImagen.Persistencia;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grpc_AutorImagen.Services
 {
@@ -35,6 +36,40 @@ namespace Grpc_AutorImagen.Services
                 return new Respuesta { Mensaje = "Error al guardar la imagen: " + ex.Message };
             }
         }
+
+        public override async Task<ImagenResponse> ObtenerImagen(ImagenConsultaRequest request, ServerCallContext context)
+        {
+            var imagen = await _contexto.AutoresImagenes
+                                        .FirstOrDefaultAsync(i => i.IdAutorLibro == request.IdAutorLibro);
+            if (imagen == null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, "Imagen no encontrada"));
+            }
+
+            return new ImagenResponse
+            {
+                Contenido = Google.Protobuf.ByteString.CopyFrom(imagen.Contenido),
+                IdAutorLibro = imagen.IdAutorLibro
+            };
+        }
+
+        public override async Task<ListaImagenesResponse> ObtenerTodasImagenes(EmptyRequest request, ServerCallContext context)
+        {
+            var imagenes = await _contexto.AutoresImagenes.ToListAsync();
+            var respuesta = new ListaImagenesResponse();
+
+            foreach (var imagen in imagenes)
+            {
+                respuesta.Imagenes.Add(new ImagenResponse
+                {
+                    Contenido = Google.Protobuf.ByteString.CopyFrom(imagen.Contenido),
+                    IdAutorLibro = imagen.IdAutorLibro
+                });
+            }
+
+            return respuesta;
+        }
+
 
     }
 }
