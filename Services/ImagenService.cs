@@ -22,7 +22,7 @@ namespace Grpc_AutorImagen.Services
                 var imagen = new AutorImagen
                 {
                     Contenido = request.Contenido.ToByteArray(),
-                    IdAutorLibro = (int)request.IdAutorLibro
+                    IdAutorLibro = request.IdAutorLibro
                 };
 
                 _contexto.AutoresImagenes.Add(imagen);

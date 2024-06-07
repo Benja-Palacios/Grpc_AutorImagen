@@ -7,6 +7,6 @@ namespace Grpc_AutorImagen.Model
     {
         public int Id { get; set; }
         public byte[] Contenido { get; set; }
-        public int IdAutorLibro {  get; set; }
+        public string IdAutorLibro {  get; set; }
     }
 }
